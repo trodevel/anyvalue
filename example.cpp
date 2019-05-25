@@ -3,52 +3,41 @@
 #include "value.h"          // FsmManager
 
 #include "str_helper.h"     // StrHelper
+#include "serializer.h"     // Serializer
 
-void test_1()
+void print_serialized( const anyvalue::Value & v )
 {
-    anyvalue::Value v( true );
+    std::ostringstream os;
+
+    anyvalue::Serializer::save( os, v );
+
+    std::cout << "serialized: " << os.str() << std::endl;
+}
+template <class T>
+void test_t( const T & val )
+{
+    anyvalue::Value v( val );
 
     std::cout << anyvalue::StrHelper::to_string( v ) << std::endl;
+
+    print_serialized( v );
 }
-
-void test_2()
-{
-    anyvalue::Value v( 3 );
-
-    std::cout << anyvalue::StrHelper::to_string( v ) << std::endl;
-}
-
-void test_3()
-{
-    anyvalue::Value v( 1.2 );
-
-    std::cout << anyvalue::StrHelper::to_string( v ) << std::endl;
-}
-
-void test_4()
-{
-    anyvalue::Value v( "hello" );
-
-    std::cout << anyvalue::StrHelper::to_string( v ) << std::endl;
-}
-
-void test_5()
-{
-    anyvalue::Value v( std::string( "world" ) );
-
-    std::cout << anyvalue::StrHelper::to_string( v ) << std::endl;
-}
-
 
 int main( int argc, char **argv )
 {
     std::cout << "Hello, world" << std::endl;
 
-    test_1();
-    test_2();
-    test_3();
-    test_4();
-    test_5();
+    test_t( true );
+    test_t( false );
+    test_t( 0 );
+    test_t( 1 );
+    test_t( -3 );
+    test_t( 0.0 );
+    test_t( 1.25 );
+    test_t( -1.25 );
+    test_t( "hello" );
+    test_t( std::string( "world" ) );
+    test_t( "hello world" );
 
     return EXIT_SUCCESS;
 }

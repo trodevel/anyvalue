@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 11621 $ $Date:: 2019-05-25 #$ $Author: serge $
+// $Revision: 11636 $ $Date:: 2019-05-26 #$ $Author: serge $
 
 #ifndef ANYVALUE_SERIALIZER_H
 #define ANYVALUE_SERIALIZER_H
@@ -32,10 +32,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 namespace serializer
 {
 anyvalue::Value** load( std::istream & is, anyvalue::Value** e );
-bool save( std::ostream & os, const anyvalue::Value * e );
+anyvalue::Value* load( std::istream & is, anyvalue::Value* e );
+bool save( std::ostream & os, const anyvalue::Value & e );
 }
-
-#include "serializer/serializer.h"   // serializer::
 
 namespace anyvalue
 {

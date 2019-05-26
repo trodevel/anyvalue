@@ -19,11 +19,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 11625 $ $Date:: 2019-05-25 #$ $Author: serge $
+// $Revision: 11636 $ $Date:: 2019-05-26 #$ $Author: serge $
 
 #include "serializer.h"     // self
 
 #include <stdexcept>        // std::invalid_argument
+
+#include "serializer/serializer.h"   // serializer::
 
 namespace serializer
 {
@@ -60,9 +62,9 @@ anyvalue::Value** load( std::istream & is, anyvalue::Value** e )
     return e;
 }
 
-bool save( std::ostream & os, const anyvalue::Value * e )
+bool save( std::ostream & os, const anyvalue::Value & e )
 {
-    return anyvalue::Serializer::save( os, * e );
+    return anyvalue::Serializer::save( os, e );
 }
 
 }

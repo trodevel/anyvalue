@@ -23,6 +23,17 @@ void test_t( const T & val )
     print_serialized( v );
 }
 
+void test_deserialization( const char * s )
+{
+    std::istringstream is( s );
+
+    anyvalue::Value v;
+
+    anyvalue::Serializer::load( is, &v );
+
+    std::cout << "deserialized: " << anyvalue::StrHelper::to_string( v ) << std::endl;
+}
+
 int main( int argc, char **argv )
 {
     std::cout << "Hello, world" << std::endl;
@@ -38,6 +49,11 @@ int main( int argc, char **argv )
     test_t( "hello" );
     test_t( std::string( "world" ) );
     test_t( "hello world" );
+
+    test_deserialization( "1 1 1" );
+    test_deserialization( "1 2 -3" );
+    test_deserialization( "1 3 1.25" );
+    test_deserialization( "1 4 hello=20world" );
 
     return EXIT_SUCCESS;
 }

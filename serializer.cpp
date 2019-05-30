@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 11636 $ $Date:: 2019-05-26 #$ $Author: serge $
+// $Revision: 11691 $ $Date:: 2019-05-30 #$ $Author: serge $
 
 #include "serializer.h"     // self
 
@@ -32,12 +32,17 @@ namespace serializer
 
 anyvalue::Value* load( std::istream & is, anyvalue::Value* e )
 {
+    return anyvalue::Serializer::load( is, e );
+}
+
+anyvalue::Value** load( std::istream & is, anyvalue::Value** e )
+{
     if( e != nullptr )
         throw std::invalid_argument( "Serializer::load: e must be null" );
 
     auto el = new anyvalue::Value;
 
-    auto res = anyvalue::Serializer::load( is, static_cast< anyvalue::Value *>( el ) );
+    auto res = anyvalue::Serializer::load( is, el );
 
     if( res == nullptr )
     {
@@ -45,19 +50,7 @@ anyvalue::Value* load( std::istream & is, anyvalue::Value* e )
         return nullptr;
     }
 
-    return el;
-}
-
-anyvalue::Value** load( std::istream & is, anyvalue::Value** e )
-{
-    auto res = load( is, static_cast< anyvalue::Value *>( nullptr ) );
-
-    if( res == nullptr )
-    {
-        return nullptr;
-    }
-
-    *e =  res;
+    *e =  el;
 
     return e;
 }

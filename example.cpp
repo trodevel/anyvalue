@@ -4,6 +4,7 @@
 
 #include "str_helper.h"     // StrHelper
 #include "serializer.h"     // Serializer
+#include "op_less.h"        // operator<
 
 void print_serialized( const anyvalue::Value & v )
 {
@@ -34,6 +35,19 @@ void test_deserialization( const char * s )
     std::cout << "deserialized: " << anyvalue::StrHelper::to_string( v ) << std::endl;
 }
 
+void test_2()
+{
+    anyvalue::Value v1( 1 );
+    anyvalue::Value v2( 5 );
+
+    auto b = v1 < v2;
+
+    if( b == true )
+        std::cout << "OK" << std::endl;
+    else
+        std::cout << "ERROR" << std::endl;
+}
+
 int main( int argc, char **argv )
 {
     std::cout << "Hello, world" << std::endl;
@@ -54,6 +68,8 @@ int main( int argc, char **argv )
     test_deserialization( "1 2 -3" );
     test_deserialization( "1 3 1.25" );
     test_deserialization( "1 4 hello=20world" );
+
+    test_2();
 
     return EXIT_SUCCESS;
 }

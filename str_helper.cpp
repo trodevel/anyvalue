@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 */
 
-// $Revision: 11607 $ $Date:: 2019-05-24 #$ $Author: serge $
+// $Revision: 11840 $ $Date:: 2019-07-08 #$ $Author: serge $
 
 #include "str_helper.h"             // self
 
@@ -166,7 +166,7 @@ const std::string & StrHelper::to_string_short( const binary_operation_type_e s 
 
 std::ostream & StrHelper::write( std::ostream & os, const Value & l )
 {
-    os << to_string_short( l.type ) << " ";
+    os << to_string_short( l.type ) << ":";
 
     return write_short( os, l );
 }
